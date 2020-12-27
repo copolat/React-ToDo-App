@@ -1,11 +1,8 @@
 import React from 'react';
 
 class Button extends React.Component{
-  buttonClicked(){
-    alert('You clicked on me!!')
-  }
   render() {
-    return <button onClick={this.buttonClicked}>{this.props.title}</button>
+    return <button onClick={this.props.click}>{this.props.title}</button>
   }
 }
 

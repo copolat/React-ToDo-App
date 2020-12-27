@@ -1,18 +1,16 @@
-import { ReactComponent } from '*.svg';
-import React from 'react';
 import Button from './Button';
 
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>{this.props.appName}</h1>;
-        <Button title='Click Me'/>;
-      </div>
-      
-    );
-  }
+function buttonClicked(){
+  alert('You clicked on me!!');
+}
 
+function App(props) {
+  return (
+      <div>
+        <h1>{props.appName}</h1>
+        <Button title='Click Me' click={buttonClicked}/>
+      </div>
+  );
 }
 
 export default App;
