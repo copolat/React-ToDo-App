@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App appName="Click App"/>
+    <App appName="Click App" description="Click the button to generate a random color"/>
   </React.StrictMode>,
   document.getElementById('root')
 );
