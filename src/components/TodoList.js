@@ -54,6 +54,22 @@ class TodoList extends React.Component {
       alert("Enter a value")
     }
   }
+
+  componentDidMount() {
+    // Using an online API as a database.
+    fetch('http://localhost:8080/api/todoitems')
+    .then((response) => response.json())
+    .then((json) => this.setState({tasks: json}))
+  }
+
+  componentDidUpdate() {
+
+  }
+
+  componentWillUnmount() {
+
+  }
+
   render() {
     // console.log(this.state.newTask) // This is to test the eventlistener
     return (
