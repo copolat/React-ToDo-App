@@ -11,6 +11,7 @@ class TodoList extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.removeItem = this. removeItem.bind(this);
+    this.editItems = this. editItems.bind(this);
   }
 
   handleInput(e) {
@@ -39,7 +40,9 @@ class TodoList extends React.Component {
           })
         });
       // Empty the newTask property in the state
-      this.state.newTask = "";
+      this.setState({
+        newTask: ''
+      })
     } else {
       alert('Please enter a value')
     }
@@ -56,8 +59,28 @@ class TodoList extends React.Component {
         tasks: filteredTasks
       })
     });
-    
   }
+  editItems(id, value){
+    fetch('http://localhost:8080/api/todoitems/' + id, {
+        method: 'PUT',
+        body: JSON.stringify({
+          title: value
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        }
+    }).then(response => response.json())
+    .then(() => {
+      const tasks = this.state.tasks;
+      tasks.map(task => {
+        if( task.id == id){
+          task.title = value
+        }
+      })
+      this.setState({tasks: tasks})
+    })
+  }
+
 
   componentDidMount() {
     fetch('http://localhost:8080/api/todoitems')
@@ -74,7 +97,7 @@ class TodoList extends React.Component {
           <button type="button" onClick={this.handleClick}>Add</button>
         </form>
         <ul>
-          <TodoItems tasks={this.state.tasks} foo="bar" removeItem={this.removeItem}/>
+          <TodoItems editItems={this.editItems} tasks={this.state.tasks} foo="bar" removeItem={this.removeItem}/>
         </ul>
       </div>
     )
